@@ -3,13 +3,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import NearbyShopsList from "./components/NearbyShopsList";
 import Navbar from "./components/Navbar";
 import PreferredShopsList from "./components/PreferredShopsList";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 function App() {
   return (
-    <div>
+    <Router>
       <Navbar/>
-      <PreferredShopsList/>
-    </div>
+      <Switch>
+        <Route path="/nearby-shops">
+          <NearbyShopsList/>
+        </Route>
+        <Route path="/preferred-shops">
+          <PreferredShopsList/>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

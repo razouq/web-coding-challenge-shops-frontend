@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchPreferredShops} from "../actions";
-import Shop from "./Shop";
+import PreferredShop from "./PreferredShop";
 
 class PreferredShopsList extends Component {
 
@@ -12,7 +12,7 @@ class PreferredShopsList extends Component {
   renderList() {
     return this.props.preferredShops.map(shop => {
       return (
-        <Shop key={shop.id} shop={shop}/>
+        <PreferredShop key={shop.id} shop={shop}/>
       )
     })
   }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Shop extends Component {
+class PreferredShop extends Component {
   render() {
     const {name, picture} = this.props.shop;
     return (
@@ -8,10 +8,9 @@ class Shop extends Component {
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">{name}</h5>
-            <img className="card-img-top" src={picture}/>
+            <img alt={name} className="card-img-top" src={picture}/>
             <div className="mt-2">
-              <a href="#" className="btn btn-danger mr-3">Dislike</a>
-              <a href="#" className="btn btn-success ">Like</a>
+              <a href="#" className="btn btn-danger mr-3">Remove</a>
             </div>
           </div>
         </div>
@@ -19,4 +18,4 @@ class Shop extends Component {
     );
   }
 }
-export default Shop;
+export default PreferredShop;
