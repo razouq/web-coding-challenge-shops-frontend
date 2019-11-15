@@ -21,14 +21,11 @@ class NearbyShopsList extends Component {
   render() {
     return (
       <div>
-        NearbyShopsList
         <div className="container">
           <div className="row">
             {this.renderList()}
           </div>
         </div>
-
-
       </div>
     );
   }
