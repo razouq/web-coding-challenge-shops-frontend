@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchNearbyShops} from "../actions";
-import Shop from "./Shop";
+import NearbyShop from "./NearbyShop";
+
 
 
 class NearbyShopsList extends Component {
@@ -13,7 +14,7 @@ class NearbyShopsList extends Component {
   renderList() {
     return this.props.nearbyShops.map(shop => {
       return (
-          <Shop key={shop.id} shop={shop}/>
+          <NearbyShop key={shop.id} shop={shop}/>
       )
     })
   }

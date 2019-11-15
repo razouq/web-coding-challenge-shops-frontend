@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Shop extends Component {
+class NearbyShop extends Component {
   render() {
     const {name, picture} = this.props.shop;
     return (
@@ -20,4 +20,4 @@ class Shop extends Component {
   }
 }
 
-export default Shop;
+export default NearbyShop;
