@@ -18,3 +18,10 @@ export const fetchNearbyShops = () => async dispatch => {
   console.log(response.data);
   dispatch({type: 'FETCH_NEARBY_SHOPS', payload: response.data});
 };
+
+export const fetchPreferredShops = () => async dispatch => {
+  const response = await axios.get("http://localhost:8080/api/shops/getPreferred/1?page=0",
+    {headers});
+  console.log(response.data);
+  dispatch({type: 'FETCH_PREFERRED_SHOPS', payload: response.data});
+};
