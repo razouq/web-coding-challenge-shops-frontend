@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {FETCH_NEARBY_SHOPS, FETCH_PREFERRED_SHOPS} from "./types";
+import {FETCH_NEARBY_SHOPS, FETCH_PREFERRED_SHOPS, LIKE_SHOP} from "./types";
 
 const headers = {
   'Content-Type': 'application/json',
@@ -24,4 +24,10 @@ export const fetchPreferredShops = () => async dispatch => {
     {headers});
   console.log(response.data);
   dispatch({type: FETCH_PREFERRED_SHOPS, payload: response.data});
+};
+
+export const likeShop = (shopId) => async dispatch => {
+  const response =  await axios.get("http://localhost:8080/api/shops/like/1/" + shopId, {headers});
+  console.log("liked");
+  dispatch(fetchNearbyShops());
 };

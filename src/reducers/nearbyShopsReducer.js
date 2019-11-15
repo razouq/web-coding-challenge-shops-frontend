@@ -1,4 +1,4 @@
-import {FETCH_NEARBY_SHOPS} from "../actions/types";
+import {FETCH_NEARBY_SHOPS, LIKE_SHOP} from "../actions/types";
 
 export default (state = [], action) => {
   switch (action.type) {
