@@ -5,6 +5,7 @@ import NearbyShopsList from "./components/NearbyShopsList";
 function App() {
   return (
     <div>
+
       <NearbyShopsList/>
     </div>
   );
