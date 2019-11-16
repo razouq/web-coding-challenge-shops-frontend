@@ -37,3 +37,8 @@ export const removeShopFromPreferredList = (shopId) => async dispatch => {
   console.log("remove " + shopId);
   dispatch(fetchPreferredShops());
 };
+
+export const register = (newUser, history) => async dispatch => {
+  await axios.post("http://localhost:8080/api/account/register", newUser);
+  history.push("/");
+};

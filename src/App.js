@@ -4,6 +4,7 @@ import NearbyShopsList from "./components/NearbyShopsList";
 import Navbar from "./components/Navbar";
 import PreferredShopsList from "./components/PreferredShopsList";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
         </Route>
         <Route path="/preferred-shops">
           <PreferredShopsList/>
+        </Route>
+        <Route path="/register">
+          <Register/>
         </Route>
       </Switch>
     </Router>
