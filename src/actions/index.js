@@ -42,3 +42,10 @@ export const register = (newUser, history) => async dispatch => {
   await axios.post("http://localhost:8080/api/account/register", newUser);
   history.push("/");
 };
+
+export const login = (user, history) => async dispatch => {
+  const response =  await axios.post("http://localhost:8080/api/authentication/login", user);
+  console.log(response.data);
+  history.push("/");
+};
+
