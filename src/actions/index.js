@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {FETCH_NEARBY_SHOPS, FETCH_PREFERRED_SHOPS, LIKE_SHOP} from "./types";
+import {FETCH_NEARBY_SHOPS, FETCH_PREFERRED_SHOPS} from "./types";
 
 const headers = {
   'Content-Type': 'application/json',
@@ -27,7 +27,13 @@ export const fetchPreferredShops = () => async dispatch => {
 };
 
 export const likeShop = (shopId) => async dispatch => {
-  const response =  await axios.get("http://localhost:8080/api/shops/like/1/" + shopId, {headers});
-  console.log("liked");
+  await axios.get("http://localhost:8080/api/shops/like/1/" + shopId, {headers});
+  console.log("liked " + shopId);
   dispatch(fetchNearbyShops());
+};
+
+export const removeShopFromPreferredList = (shopId) => async dispatch => {
+  await axios.get("http://localhost:8080/api/shops/removeLikedShop/1/" + shopId, {headers});
+  console.log("remove " + shopId);
+  dispatch(fetchPreferredShops());
 };
