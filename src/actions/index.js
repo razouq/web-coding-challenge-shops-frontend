@@ -1,10 +1,7 @@
 import axios from 'axios';
-import {FETCH_NEARBY_SHOPS, FETCH_PREFERRED_SHOPS} from "./types";
-
-const headers = {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyYXpvdXEiLCJleHAiOjE1NzY0NDc1MjZ9.jkOv_BbsjUa9D_cxteBxM_kk88lf_TX28znn9lRz4ztmnLJjXmZzemPbeJHuqVoiVXmkugkglaGG_tBj92f-4A'
-};
+import {FETCH_NEARBY_SHOPS, FETCH_PREFERRED_SHOPS, SET_CURRENT_USER} from "./types";
+import jwt_decode from 'jwt-decode';
+import setToken from "../security-utils/setToken";
 
 const data = {
   "lat": "-6.82861",
@@ -14,26 +11,25 @@ const data = {
 
 export const fetchNearbyShops = () => async dispatch => {
   const response = await axios.post("http://localhost:8080/api/shops/getNearby/1?page=0",
-    data,{headers});
+    data);
   console.log(response.data);
   dispatch({type: FETCH_NEARBY_SHOPS, payload: response.data});
 };
 
 export const fetchPreferredShops = () => async dispatch => {
-  const response = await axios.get("http://localhost:8080/api/shops/getPreferred/1?page=0",
-    {headers});
+  const response = await axios.get("http://localhost:8080/api/shops/getPreferred/1?page=0");
   console.log(response.data);
   dispatch({type: FETCH_PREFERRED_SHOPS, payload: response.data});
 };
 
 export const likeShop = (shopId) => async dispatch => {
-  await axios.get("http://localhost:8080/api/shops/like/1/" + shopId, {headers});
+  await axios.get("http://localhost:8080/api/shops/like/1/" + shopId);
   console.log("liked " + shopId);
   dispatch(fetchNearbyShops());
 };
 
 export const removeShopFromPreferredList = (shopId) => async dispatch => {
-  await axios.get("http://localhost:8080/api/shops/removeLikedShop/1/" + shopId, {headers});
+  await axios.get("http://localhost:8080/api/shops/removeLikedShop/1/" + shopId);
   console.log("remove " + shopId);
   dispatch(fetchPreferredShops());
 };
@@ -45,7 +41,15 @@ export const register = (newUser, history) => async dispatch => {
 
 export const login = (user, history) => async dispatch => {
   const response =  await axios.post("http://localhost:8080/api/authentication/login", user);
-  console.log(response.data);
+  const {token} = response.data;
+  localStorage.setItem("token", token);
+  setToken(token);
+  const decode = jwt_decode(token);
+  console.log(decode);
+  dispatch({
+    type: SET_CURRENT_USER,
+    payload: decode
+  });
   history.push("/");
 };
 
