@@ -5,11 +5,23 @@ const initialState = {
   user: {}
 };
 
+
+const check = payload => {
+  if(Object.keys(payload).length === 0) {
+    console.log("false " + payload);
+    return false;
+  } else {
+    console.log("true " + payload);
+    return true;
+  }
+};
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case SET_CURRENT_USER:
       return {
-        validToken: !!action.payload,
+        ...state,
+        validToken: check(action.payload),
         user: action.payload
       };
     default:

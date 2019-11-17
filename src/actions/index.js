@@ -53,3 +53,14 @@ export const login = (user, history) => async dispatch => {
   history.push("/");
 };
 
+
+export const logout = () => dispatch => {
+  console.log("logout");
+  localStorage.removeItem("token");
+  setToken(false);
+  dispatch({
+    type: SET_CURRENT_USER,
+    payload: {}
+  });
+};
+

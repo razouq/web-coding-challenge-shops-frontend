@@ -1,8 +1,14 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux';
+import {logout} from './../actions';
 
 class Navbar extends Component {
+
+  logout = () => {
+    this.props.logout();
+  };
+
   render() {
     const {validToken} = this.props;
     return (
@@ -22,7 +28,7 @@ class Navbar extends Component {
               validToken &&
                 <div>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/nearby-shops">Logout</Link>
+                    <Link className="nav-link" to="/login" onClick={()=>this.logout()}>Logout</Link>
                   </li>
                 </div>
             }
@@ -55,4 +61,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, {logout})(Navbar);
