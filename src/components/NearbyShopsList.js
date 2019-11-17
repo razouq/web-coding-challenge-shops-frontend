@@ -7,8 +7,19 @@ import NearbyShop from "./NearbyShop";
 
 class NearbyShopsList extends Component {
 
+  constructor(props) {
+    super(props);
+    this.listRef = React.createRef();
+  }
+
   componentDidMount() {
     this.props.fetchNearbyShops();
+    console.log(this.listRef);
+    window.addEventListener("scroll", this.handleScroll,false)
+  }
+
+  handleScroll() {
+    console.log("hi");
   }
 
   renderList() {
@@ -21,7 +32,7 @@ class NearbyShopsList extends Component {
 
   render() {
     return (
-      <div>
+      <div ref={this.listRef}>
         <div className="container">
           <div className="row">
             {this.renderList()}
