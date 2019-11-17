@@ -4,7 +4,7 @@ import {likeShop} from "../actions";
 
 class NearbyShop extends Component {
 
-  onClick = (shopId) => {
+  like = (shopId) => {
     console.log(shopId);
     this.props.likeShop(shopId);
   };
@@ -18,8 +18,8 @@ class NearbyShop extends Component {
             <h5 className="card-title">{name}</h5>
             <img alt={name} className="card-img-top" src={picture}/>
             <div className="mt-2">
-              <button  className="btn btn-danger mr-3">Dislike</button>
-              <button  className="btn btn-success" onClick={()=>this.onClick(id)}>Like</button>
+              <button  className="btn btn-danger mr-3" >Dislike</button>
+              <button  className="btn btn-success" onClick={()=>this.like(id)}>Like</button>
             </div>
           </div>
         </div>
