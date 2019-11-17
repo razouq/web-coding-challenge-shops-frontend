@@ -34,6 +34,6 @@ class PreferredShopsList extends Component {
 
 const mapStateToProps = (state) => {
   return {preferredShops: state.preferredShops}
-}
+};
 
 export default connect(mapStateToProps, {fetchPreferredShops})(PreferredShopsList);

@@ -1,5 +1,12 @@
 import axios from 'axios';
-import {FETCH_NEARBY_SHOPS, FETCH_PREFERRED_SHOPS, SET_CURRENT_USER} from "./types";
+import {FETCH_NEARBY_SHOPS,
+        FETCH_PREFERRED_SHOPS,
+        LIKE_DISLIKE_SHOP,
+        LOADING_NEARBY_SHOPS,
+        SET_CURRENT_USER,
+        FETCH_MORE_NEARBY_SHOPS,
+        CLEAN_NEARBY_SHOPS_LIST
+        } from "./types";
 import jwt_decode from 'jwt-decode';
 import setToken from "../security-utils/setToken";
 
@@ -8,12 +15,46 @@ const data = {
   "lon": "33.99216"
 };
 
-
 export const fetchNearbyShops = () => async dispatch => {
+  // first loading
+  dispatch({
+    type: CLEAN_NEARBY_SHOPS_LIST
+  });
+
+  dispatch({
+    type: LOADING_NEARBY_SHOPS,
+    payload: {
+      loading: true,
+      page: 1
+    }
+  });
+  console.log("loading page: ", 0);
   const response = await axios.post("http://localhost:8080/api/shops/getNearby?page=0",
     data);
   console.log(response.data);
-  dispatch({type: FETCH_NEARBY_SHOPS, payload: response.data});
+  dispatch({
+    type: FETCH_NEARBY_SHOPS,
+    payload: response.data
+  });
+};
+
+export const fetchMoreNearbyShops = page => async dispatch => {
+
+  dispatch({
+    type: LOADING_NEARBY_SHOPS,
+    payload: {
+      page: page+1,
+      loading: true
+    }
+  });
+  console.log("loading page: ", page);
+  const response = await axios.post("http://localhost:8080/api/shops/getNearby?page=" + page,
+    data);
+  console.log(response.data);
+  dispatch({
+    type: FETCH_MORE_NEARBY_SHOPS,
+    payload: response.data
+  });
 };
 
 export const fetchPreferredShops = () => async dispatch => {
@@ -25,12 +66,15 @@ export const fetchPreferredShops = () => async dispatch => {
 export const likeShop = shopId => async dispatch => {
   await axios.get("http://localhost:8080/api/shops/like/" + shopId);
   console.log("liked " + shopId);
-  dispatch(fetchNearbyShops());
+  dispatch({
+    type: LIKE_DISLIKE_SHOP,
+    payload: shopId
+  });
 };
 
 export const dislikeShop = shopId => async dispatch => {
   await axios.get("http://localhost:8080/api/shops/dislike/"+shopId);
-  dispatch(fetchNearbyShops());
+  dispatch(fetchNearbyShops(0));
 };
 
 export const removeShopFromPreferredList = shopId => async dispatch => {
@@ -68,4 +112,6 @@ export const logout = () => dispatch => {
     payload: {}
   });
 };
+
+
 
