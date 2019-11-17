@@ -13,10 +13,20 @@ class NearbyShopsList extends Component {
     this.handleScroll = this.handleScroll.bind(this);
   }
 
+
+
+
+
   componentDidMount() {
-    console.log("did mount");
-    this.props.fetchNearbyShops();
-    console.log(this.listRef);
+      window.navigator.geolocation.getCurrentPosition(
+      async position => {
+      console.log(position.coords.longitude);
+        this.props.fetchNearbyShops({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude
+        });
+        },
+        ()=>console.log('failed'));
     window.addEventListener("scroll", this.handleScroll,false)
   }
 
@@ -30,8 +40,18 @@ class NearbyShopsList extends Component {
     const {offsetTop, scrollHeight} = this.listRef.current;
     // console.log(innerHeight + scrollY, offsetTop + scrollHeight);
     if(innerHeight + scrollY > offsetTop + scrollHeight - 5) {
-      console.log("fetch more", page);
-      this.props.fetchMoreNearbyShops(page);
+      window.navigator.geolocation.getCurrentPosition(
+        position => {
+          this.props.fetchMoreNearbyShops(
+            {
+              lat: position.coords.latitude,
+              lon: position.coords.longitude
+            },
+            page
+          )
+        },
+        ()=>console.log('failed')
+      )
     }
   }
 
@@ -67,7 +87,7 @@ const mapStateToProps = (state) => {
   return {
     nearbyShops: state.nearbyShops.shops,
     loading: state.nearbyShops.loading,
-    page: state.nearbyShops.page
+    page: state.nearbyShops.page,
   }
 };
 

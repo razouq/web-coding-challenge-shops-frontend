@@ -10,12 +10,9 @@ import {FETCH_NEARBY_SHOPS,
 import jwt_decode from 'jwt-decode';
 import setToken from "../security-utils/setToken";
 
-const data = {
-  "lat": "-6.82861",
-  "lon": "33.99216"
-};
 
-export const fetchNearbyShops = () => async dispatch => {
+
+export const fetchNearbyShops = (position) => async dispatch => {
   // first loading
   dispatch({
     type: CLEAN_NEARBY_SHOPS_LIST
@@ -30,7 +27,7 @@ export const fetchNearbyShops = () => async dispatch => {
   });
   console.log("loading page: ", 0);
   const response = await axios.post("http://localhost:8080/api/shops/getNearby?page=0",
-    data);
+    position);
   console.log(response.data);
   dispatch({
     type: FETCH_NEARBY_SHOPS,
@@ -38,7 +35,7 @@ export const fetchNearbyShops = () => async dispatch => {
   });
 };
 
-export const fetchMoreNearbyShops = page => async dispatch => {
+export const fetchMoreNearbyShops = (position, page) => async dispatch => {
 
   dispatch({
     type: LOADING_NEARBY_SHOPS,
@@ -49,7 +46,7 @@ export const fetchMoreNearbyShops = page => async dispatch => {
   });
   console.log("loading page: ", page);
   const response = await axios.post("http://localhost:8080/api/shops/getNearby?page=" + page,
-    data);
+    position);
   console.log(response.data);
   dispatch({
     type: FETCH_MORE_NEARBY_SHOPS,
