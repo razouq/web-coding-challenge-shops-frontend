@@ -22,13 +22,18 @@ export const fetchPreferredShops = () => async dispatch => {
   dispatch({type: FETCH_PREFERRED_SHOPS, payload: response.data});
 };
 
-export const likeShop = (shopId) => async dispatch => {
+export const likeShop = shopId => async dispatch => {
   await axios.get("http://localhost:8080/api/shops/like/" + shopId);
   console.log("liked " + shopId);
   dispatch(fetchNearbyShops());
 };
 
-export const removeShopFromPreferredList = (shopId) => async dispatch => {
+export const dislikeShop = shopId => async dispatch => {
+  await axios.get("http://localhost:8080/api/shops/dislike/"+shopId);
+  dispatch(fetchNearbyShops());
+};
+
+export const removeShopFromPreferredList = shopId => async dispatch => {
   await axios.get("http://localhost:8080/api/shops/removeLikedShop/" + shopId);
   console.log("remove " + shopId);
   dispatch(fetchPreferredShops());
@@ -50,7 +55,7 @@ export const login = (user, history) => async dispatch => {
     type: SET_CURRENT_USER,
     payload: decode
   });
-  history.push("/");
+  history.push("/nearby-shops");
 };
 
 
