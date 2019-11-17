@@ -10,26 +10,26 @@ const data = {
 
 
 export const fetchNearbyShops = () => async dispatch => {
-  const response = await axios.post("http://localhost:8080/api/shops/getNearby/1?page=0",
+  const response = await axios.post("http://localhost:8080/api/shops/getNearby?page=0",
     data);
   console.log(response.data);
   dispatch({type: FETCH_NEARBY_SHOPS, payload: response.data});
 };
 
 export const fetchPreferredShops = () => async dispatch => {
-  const response = await axios.get("http://localhost:8080/api/shops/getPreferred/1?page=0");
+  const response = await axios.get("http://localhost:8080/api/shops/getPreferred?page=0");
   console.log(response.data);
   dispatch({type: FETCH_PREFERRED_SHOPS, payload: response.data});
 };
 
 export const likeShop = (shopId) => async dispatch => {
-  await axios.get("http://localhost:8080/api/shops/like/1/" + shopId);
+  await axios.get("http://localhost:8080/api/shops/like/" + shopId);
   console.log("liked " + shopId);
   dispatch(fetchNearbyShops());
 };
 
 export const removeShopFromPreferredList = (shopId) => async dispatch => {
-  await axios.get("http://localhost:8080/api/shops/removeLikedShop/1/" + shopId);
+  await axios.get("http://localhost:8080/api/shops/removeLikedShop/" + shopId);
   console.log("remove " + shopId);
   dispatch(fetchPreferredShops());
 };
