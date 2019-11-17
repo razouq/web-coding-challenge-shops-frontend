@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {Link} from "react-router-dom";
+import {connect} from 'react-redux';
 
 class Navbar extends Component {
   render() {
+    const {validToken} = this.props;
     return (
       <div className="my-3">
-        <nav className="navbar justify-content-end container">
+        <nav className="navbar container">
           <ul className="nav">
             <li className="nav-item">
               <Link className="nav-link" to="/nearby-shops">Nearby Shops</Link>
@@ -13,6 +15,33 @@ class Navbar extends Component {
             <li className="nav-item">
               <Link className="nav-link" to="/preferred-shops">My Preferred Shops</Link>
             </li>
+
+          </ul>
+          <ul className="nav justify-content-end">
+            {
+              validToken &&
+                <div>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/nearby-shops">Logout</Link>
+                  </li>
+                </div>
+            }
+            {
+              !validToken &&
+                <div>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/register">register</Link>
+                  </li>
+                </div>
+            }
+            {
+              !validToken &&
+                <div>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/login">Login</Link>
+                  </li>
+                </div>
+            }
           </ul>
         </nav>
       </div>
@@ -20,4 +49,10 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    validToken: state.security.validToken
+  }
+};
+
+export default connect(mapStateToProps)(Navbar);
