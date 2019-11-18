@@ -15,8 +15,8 @@ import jwt_decode from 'jwt-decode';
 import setToken from "../security-utils/setToken";
 
 
-/***************
- *   NEARBY SHOPS
+/********************
+ *   NEARBY SHOPS   *
  ********************/
 
 export const fetchNearbyShops = (position) => async dispatch => {
@@ -92,9 +92,14 @@ export const fetchMorePreferredShops = page => async dispatch => {
   });
 };
 
+
+/***********************
+ * LIKE DISLIKE REMOVE *
+ ***********************/
+
+
 export const likeShop = shopId => async dispatch => {
   await axios.get("http://localhost:8080/api/shops/like/" + shopId);
-  console.log("liked " + shopId);
   dispatch({
     type: LIKE_DISLIKE_SHOP,
     payload: shopId
@@ -103,7 +108,10 @@ export const likeShop = shopId => async dispatch => {
 
 export const dislikeShop = shopId => async dispatch => {
   await axios.get("http://localhost:8080/api/shops/dislike/"+shopId);
-  dispatch(fetchNearbyShops(0));
+  dispatch({
+    type: LIKE_DISLIKE_SHOP,
+    payload: shopId
+  });
 };
 
 export const removeShopFromPreferredList = shopId => async dispatch => {
@@ -114,6 +122,11 @@ export const removeShopFromPreferredList = shopId => async dispatch => {
     payload: shopId
   });
 };
+
+
+/*******************
+ * REGISTER LOGIN  *
+ *******************/
 
 export const register = (newUser, history) => async dispatch => {
   await axios.post("http://localhost:8080/api/account/register", newUser);

@@ -4,7 +4,6 @@ import {
   LOADING_NEARBY_SHOPS,
   FETCH_MORE_NEARBY_SHOPS, CLEAN_NEARBY_SHOPS_LIST
 } from "../actions/types";
-import {dislikeShop} from "../actions";
 
 const initialState = {
   shops: [],
