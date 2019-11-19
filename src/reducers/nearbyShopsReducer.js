@@ -4,6 +4,7 @@ import {
   LOADING_NEARBY_SHOPS,
   FETCH_MORE_NEARBY_SHOPS, CLEAN_NEARBY_SHOPS_LIST
 } from "../actions/types";
+import _ from 'lodash';
 
 const initialState = {
   shops: [],
@@ -18,14 +19,14 @@ export default (state = initialState, action) => {
     case FETCH_NEARBY_SHOPS:
       return {
         ...state,
-        shops: [...state.shops, ...action.payload],
+        shops: _.uniqBy([...state.shops, ...action.payload], 'id'),
         loading: false,
         hasMore: (Object.keys(action.payload).length === 12)
       };
     case FETCH_MORE_NEARBY_SHOPS:
       return {
         ...state,
-        shops: [...state.shops, ...action.payload],
+        shops: _.uniqBy([...state.shops, ...action.payload], 'id'),
         loading: false,
         hasMore: (Object.keys(action.payload).length === 12)
       };
