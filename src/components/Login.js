@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {withRouter} from 'react-router-dom';
-import {login} from './../actions';
+import {login, cleanLoginErrors} from './../actions';
 
 class Login extends Component {
 
@@ -23,7 +23,12 @@ class Login extends Component {
     this.props.login(user, this.props.history);
   };
 
+  componentDidMount() {
+    this.props.cleanLoginErrors();
+  }
+
   render() {
+    const {errors} = this.props;
     return (
       <div className="card container">
         <div className="card-title p-3">
@@ -32,6 +37,11 @@ class Login extends Component {
         <div className="card-body">
           <div className="container">
             <form onSubmit={(e)=>this.onSubmit(e)}>
+              {
+                errors.login && (
+                  <div className="text-danger mb-3">{errors.login}</div>
+                )
+              }
               <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input name="username"
@@ -65,5 +75,11 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    errors: state.errorsLogin.errors
+  }
+};
 
-export default connect(null, {login})(withRouter(Login));
+
+export default connect(mapStateToProps, {login, cleanLoginErrors})(withRouter(Login));

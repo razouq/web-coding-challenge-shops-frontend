@@ -10,7 +10,8 @@ import {
   CLEAN_PREFERRED_SHOPS_LIST,
   LOADING_PREFERRED_SHOPS,
   FETCH_MORE_PREFERRED_SHOPS,
-  REMOVE_SHOP, ERRORS_REGISTER, CLEAN_ERRORS_REGISTER
+  REMOVE_SHOP, ERRORS_REGISTER, CLEAN_ERRORS_REGISTER, ERRORS_LOGIN,
+  CLEAN_ERRORS_LOGIN
 } from "./types";
 import jwt_decode from 'jwt-decode';
 import setToken from "../security-utils/setToken";
@@ -146,19 +147,26 @@ export const register = (newUser, history) => async dispatch => {
 };
 
 export const login = (user, history) => async dispatch => {
-  const response =  await axios.post("http://localhost:8080/api/authentication/login", user);
-  const {token} = response.data;
-  localStorage.setItem("token", token);
-  setToken(token);
-  const decode = jwt_decode(token);
-  console.log(decode);
-  dispatch({
-    type: SET_CURRENT_USER,
-    payload: decode
-  });
-  history.push("/nearby-shops");
+  try {
+    const response =  await axios.post("http://localhost:8080/api/authentication/login", user);
+    const {token} = response.data;
+    localStorage.setItem("token", token);
+    setToken(token);
+    const decode = jwt_decode(token);
+    console.log(decode);
+    dispatch({
+      type: SET_CURRENT_USER,
+      payload: decode
+    });
+    history.push("/nearby-shops");
+  } catch (err) {
+    console.log(err.response.data);
+    dispatch({
+      type: ERRORS_LOGIN,
+      payload: {'login':'wrong username or password'}
+    });
+  }
 };
-
 
 export const logout = () => dispatch => {
   localStorage.removeItem("token");
@@ -172,6 +180,13 @@ export const logout = () => dispatch => {
 export const cleanRegisterErrors = () => dispatch => {
   dispatch({
     type: CLEAN_ERRORS_REGISTER,
+    payload: {}
+  })
+};
+
+export const cleanLoginErrors = () => dispatch => {
+  dispatch({
+    type: CLEAN_ERRORS_LOGIN,
     payload: {}
   })
 };
