@@ -129,8 +129,12 @@ export const removeShopFromPreferredList = shopId => async dispatch => {
  *******************/
 
 export const register = (newUser, history) => async dispatch => {
-  await axios.post("http://localhost:8080/api/account/register", newUser);
-  history.push("/");
+  try {
+    await axios.post("http://localhost:8080/api/account/register", newUser);
+  } catch (e) {
+    console.log(e.response.data);
+  }
+  history.push("/login");
 };
 
 export const login = (user, history) => async dispatch => {

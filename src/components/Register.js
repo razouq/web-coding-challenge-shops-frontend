@@ -8,7 +8,7 @@ class Register extends Component {
   state = {
     username: "",
     password: "",
-    passwordConfirmation:""
+    passwordConfirm:""
   };
 
 
@@ -22,7 +22,7 @@ class Register extends Component {
     const newUser = {
       username: this.state.username,
       password: this.state.password,
-      passwordConfirmation: this.state.passwordConfirmation
+      passwordConfirm: this.state.passwordConfirm
     };
     this.props.register(newUser, this.props.history);
   };
@@ -56,12 +56,12 @@ class Register extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="password-confirmation">Password Confirmation</label>
-            <input name="passwordConfirmation"
+            <input name="passwordConfirm"
                    type="password"
                    className="form-control"
                    id="password-confirmation"
                    placeholder="Password Confirmation"
-                   value={this.state.passwordConfirmation}
+                   value={this.state.passwordConfirm}
                    onChange={(e)=>this.onChange(e)}
             />
           </div>
