@@ -63,7 +63,7 @@ const mapStateToProps = (state) => {
   return {
     preferredShops: state.preferredShops.shops,
     loading: state.preferredShops.loading,
-    page: state.preferredShops.page,
+    page: state.preferredShops.page
   }
 };
 

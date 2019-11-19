@@ -25,34 +25,42 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="container">
-        <form onSubmit={(e)=>this.onSubmit(e)}>
-          <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input name="username"
-                   className="form-control"
-                   id="username"
-                   placeholder="Enter email"
-                   value={this.state.username}
-                   onChange={(e)=>this.onChange(e)}
-            />
+      <div className="card container">
+        <div className="card-title p-3">
+          <h2 className="text-center">Login</h2>
+        </div>
+        <div className="card-body">
+          <div className="container">
+            <form onSubmit={(e)=>this.onSubmit(e)}>
+              <div className="form-group">
+                <label htmlFor="username">Username</label>
+                <input name="username"
+                       className="form-control"
+                       id="username"
+                       placeholder="Username"
+                       value={this.state.username}
+                       onChange={(e)=>this.onChange(e)}
+                />
 
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input name="password"
-                   type="password"
-                   className="form-control"
-                   id="password"
-                   placeholder="Password"
-                   value={this.state.password}
-                   onChange={(e)=>this.onChange(e)}
-            />
-          </div>
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input name="password"
+                       type="password"
+                       className="form-control"
+                       id="password"
+                       placeholder="Password"
+                       value={this.state.password}
+                       onChange={(e)=>this.onChange(e)}
+                />
+              </div>
 
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
+              <button type="submit" className="btn btn-primary">Login</button>
+            </form>
+          </div>
+        </div>
       </div>
+
     );
   }
 }

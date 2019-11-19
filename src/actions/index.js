@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {FETCH_NEARBY_SHOPS,
+import {
+  FETCH_NEARBY_SHOPS,
   FETCH_PREFERRED_SHOPS,
   LIKE_DISLIKE_SHOP,
   LOADING_NEARBY_SHOPS,
@@ -9,8 +10,8 @@ import {FETCH_NEARBY_SHOPS,
   CLEAN_PREFERRED_SHOPS_LIST,
   LOADING_PREFERRED_SHOPS,
   FETCH_MORE_PREFERRED_SHOPS,
-  REMOVE_SHOP
-        } from "./types";
+  REMOVE_SHOP, ERRORS_REGISTER, CLEAN_ERRORS_REGISTER
+} from "./types";
 import jwt_decode from 'jwt-decode';
 import setToken from "../security-utils/setToken";
 
@@ -131,10 +132,17 @@ export const removeShopFromPreferredList = shopId => async dispatch => {
 export const register = (newUser, history) => async dispatch => {
   try {
     await axios.post("http://localhost:8080/api/account/register", newUser);
-  } catch (e) {
-    console.log(e.response.data);
+    history.push("/login");
+    dispatch({
+      type: ERRORS_REGISTER,
+      payload: {}
+    })
+  } catch (err) {
+    dispatch({
+      type: ERRORS_REGISTER,
+      payload: err.response.data
+    });
   }
-  history.push("/login");
 };
 
 export const login = (user, history) => async dispatch => {
@@ -153,13 +161,19 @@ export const login = (user, history) => async dispatch => {
 
 
 export const logout = () => dispatch => {
-  console.log("logout");
   localStorage.removeItem("token");
   setToken(false);
   dispatch({
     type: SET_CURRENT_USER,
     payload: {}
   });
+};
+
+export const cleanRegisterErrors = () => dispatch => {
+  dispatch({
+    type: CLEAN_ERRORS_REGISTER,
+    payload: {}
+  })
 };
 
 
