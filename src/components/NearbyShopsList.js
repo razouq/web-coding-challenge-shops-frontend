@@ -13,25 +13,22 @@ class NearbyShopsList extends Component {
     this.handleScroll = this.handleScroll.bind(this);
   }
 
-
-
-
-
   componentDidMount() {
       window.navigator.geolocation.getCurrentPosition(
       async position => {
-      console.log(position.coords.longitude);
         this.props.fetchNearbyShops({
           lat: position.coords.latitude,
           lon: position.coords.longitude
         });
         },
         ()=>console.log('failed'));
-    window.addEventListener("scroll", this.handleScroll,false)
+    window.addEventListener("scroll", this.handleScroll,false);
+    window.addEventListener("click", this.handleScroll,false);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll, false);
+    window.removeEventListener('click', this.handleScroll, false);
   }
 
   handleScroll() {

@@ -18,7 +18,8 @@ export default (state = initialState, action) => {
     case FETCH_NEARBY_SHOPS:
       return {
         ...state,
-        shops: [...state.shops, ...action.payload]
+        shops: [...state.shops, ...action.payload],
+        loading: false
       };
     case FETCH_MORE_NEARBY_SHOPS:
       return {

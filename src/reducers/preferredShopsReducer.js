@@ -20,7 +20,8 @@ export default (state = initialState, action) => {
     case FETCH_PREFERRED_SHOPS:
       return {
         ...state,
-        shops: [...state.shops, ...action.payload]
+        shops: [...state.shops, ...action.payload],
+        loading: false
       };
     case FETCH_MORE_PREFERRED_SHOPS:
       return {
