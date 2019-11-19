@@ -30,6 +30,17 @@ class NearbyShopsList extends Component {
   }
 
 
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+
+    console.log("update");
+    console.log(prevProps.nearbyShops.length);
+
+    if(prevProps.nearbyShops.length < 12) {
+      this.handleScroll();
+    }
+  }
+
   handleScroll() {
     const {page, loading, hasMore} = this.props;
     const {innerHeight, scrollY} = window;
