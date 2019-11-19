@@ -19,12 +19,15 @@ export default (state = initialState, action) => {
       return {
         ...state,
         shops: [...state.shops, ...action.payload],
-        loading: false
+        loading: false,
+        hasMore: (Object.keys(action.payload).length === 12)
       };
     case FETCH_MORE_NEARBY_SHOPS:
       return {
         ...state,
-        shops: [...state.shops, ...action.payload]
+        shops: [...state.shops, ...action.payload],
+        loading: false,
+        hasMore: (Object.keys(action.payload).length === 12)
       };
     case LOADING_NEARBY_SHOPS:
       return {

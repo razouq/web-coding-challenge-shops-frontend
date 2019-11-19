@@ -15,11 +15,13 @@ class PreferredShopsList extends Component {
 
   componentDidMount() {
     this.props.fetchPreferredShops();
-    window.addEventListener("scroll", this.handleScroll,false)
+    window.addEventListener("scroll", this.handleScroll,false);
+    // window.addEventListener("click", this.handleScroll,false);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll, false);
+    // window.removeEventListener('click', this.handleScroll, false);
   }
 
   handleScroll() {

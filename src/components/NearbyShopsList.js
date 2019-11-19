@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 import {fetchNearbyShops, fetchMoreNearbyShops} from "../actions";
 import NearbyShop from "./NearbyShop";
 
-
-
 class NearbyShopsList extends Component {
 
   constructor(props) {
@@ -23,20 +21,22 @@ class NearbyShopsList extends Component {
         },
         ()=>console.log('failed'));
     window.addEventListener("scroll", this.handleScroll,false);
-    window.addEventListener("click", this.handleScroll,false);
+    // window.addEventListener("click", this.handleScroll,false);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll, false);
-    window.removeEventListener('click', this.handleScroll, false);
+    // window.removeEventListener('click', this.handleScroll, false);
   }
 
+
   handleScroll() {
-    const {page} = this.props;
+    const {page, loading, hasMore} = this.props;
     const {innerHeight, scrollY} = window;
     const {offsetTop, scrollHeight} = this.listRef.current;
-    // console.log(innerHeight + scrollY, offsetTop + scrollHeight);
-    if(innerHeight + scrollY > offsetTop + scrollHeight - 5) {
+    // console.log(innerHeight + scrollY, offsetTop + scrollHeight, (innerHeight + scrollY > offsetTop + scrollHeight) && !loading);
+    if((innerHeight + scrollY > offsetTop + scrollHeight - 5) && !loading && hasMore) {
+      console.log("should load more ...");
       window.navigator.geolocation.getCurrentPosition(
         position => {
           this.props.fetchMoreNearbyShops(
@@ -85,6 +85,7 @@ const mapStateToProps = (state) => {
     nearbyShops: state.nearbyShops.shops,
     loading: state.nearbyShops.loading,
     page: state.nearbyShops.page,
+    hasMore: state.nearbyShops.hasMore
   }
 };
 

@@ -35,9 +35,10 @@ export const fetchNearbyShops = (position) => async dispatch => {
     }
   });
   const response = await axios.post("http://localhost:8080/api/shops/getNearby?page=0", position);
+  console.log("number of shops" + Object.keys(response.data).length);
   dispatch({
     type: FETCH_NEARBY_SHOPS,
-    payload: response.data
+    payload: response.data,
   });
 };
 
@@ -50,6 +51,7 @@ export const fetchMoreNearbyShops = (position, page) => async dispatch => {
     }
   });
   const response = await axios.post("http://localhost:8080/api/shops/getNearby?page=" + page, position);
+  console.log("number of shops" + Object.keys(response.data).length);
   dispatch({
     type: FETCH_MORE_NEARBY_SHOPS,
     payload: response.data
