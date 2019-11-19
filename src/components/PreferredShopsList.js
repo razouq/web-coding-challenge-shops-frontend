@@ -24,11 +24,21 @@ class PreferredShopsList extends Component {
     // window.removeEventListener('click', this.handleScroll, false);
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+
+    console.log("update");
+    console.log(prevProps.preferredShops.length);
+
+    if(prevProps.preferredShops.length < 12) {
+      this.handleScroll();
+    }
+  }
+
   handleScroll() {
-    const {page} = this.props;
+    const {page, loading, hasMore} = this.props;
     const {innerHeight, scrollY} = window;
     const {offsetTop, scrollHeight} = this.listRef.current;
-    if(innerHeight + scrollY > offsetTop + scrollHeight - 5) {
+    if((innerHeight + scrollY > offsetTop + scrollHeight - 5) && !loading && hasMore) {
       this.props.fetchMorePreferredShops(page);
     }
   }
@@ -65,7 +75,8 @@ const mapStateToProps = (state) => {
   return {
     preferredShops: state.preferredShops.shops,
     loading: state.preferredShops.loading,
-    page: state.preferredShops.page
+    page: state.preferredShops.page,
+    hasMore: state.preferredShops.hasMore
   }
 };
 

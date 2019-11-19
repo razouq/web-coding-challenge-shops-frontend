@@ -5,6 +5,7 @@ import {
   LOADING_PREFERRED_SHOPS,
   REMOVE_SHOP
 } from "../actions/types";
+import _ from "lodash";
 
 const initialState = {
   shops: [],
@@ -19,13 +20,16 @@ export default (state = initialState, action) => {
     case FETCH_PREFERRED_SHOPS:
       return {
         ...state,
-        shops: [...state.shops, ...action.payload],
-        loading: false
+        shops: _.uniqBy([...state.shops, ...action.payload], 'id'),
+        loading: false,
+        hasMore: (Object.keys(action.payload).length === 12)
       };
     case FETCH_MORE_PREFERRED_SHOPS:
       return {
         ...state,
-        shops: [...state.shops, ...action.payload]
+        shops: _.uniqBy([...state.shops, ...action.payload], 'id'),
+        loading: false,
+        hasMore: (Object.keys(action.payload).length === 12)
       };
     case LOADING_PREFERRED_SHOPS:
       return {
