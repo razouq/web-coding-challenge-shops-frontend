@@ -34,7 +34,7 @@ export const fetchNearbyShops = (position) => async dispatch => {
       page: 1
     }
   });
-  const response = await axios.post("http://localhost:8080/api/shops/getNearby?page=0", position);
+  const response = await axios.post("/api/shops/getNearby?page=0", position);
   console.log("number of shops" + Object.keys(response.data).length);
   dispatch({
     type: FETCH_NEARBY_SHOPS,
@@ -50,7 +50,7 @@ export const fetchMoreNearbyShops = (position, page) => async dispatch => {
       loading: true
     }
   });
-  const response = await axios.post("http://localhost:8080/api/shops/getNearby?page=" + page, position);
+  const response = await axios.post("/api/shops/getNearby?page=" + page, position);
   console.log("number of shops" + Object.keys(response.data).length);
   dispatch({
     type: FETCH_MORE_NEARBY_SHOPS,
@@ -74,7 +74,7 @@ export const fetchPreferredShops = () => async dispatch => {
       page: 1
     }
   });
-  const response = await axios.get("http://localhost:8080/api/shops/getPreferred?page=0");
+  const response = await axios.get("/api/shops/getPreferred?page=0");
   dispatch({
     type: FETCH_PREFERRED_SHOPS,
     payload: response.data
@@ -89,7 +89,7 @@ export const fetchMorePreferredShops = page => async dispatch => {
       loading: true
     }
   });
-  const response = await axios.get("http://localhost:8080/api/shops/getPreferred?page=" + page);
+  const response = await axios.get("/api/shops/getPreferred?page=" + page);
   dispatch({
     type: FETCH_MORE_PREFERRED_SHOPS,
     payload: response.data
@@ -103,7 +103,7 @@ export const fetchMorePreferredShops = page => async dispatch => {
 
 
 export const likeShop = shopId => async dispatch => {
-  await axios.get("http://localhost:8080/api/shops/like/" + shopId);
+  await axios.get("/api/shops/like/" + shopId);
   dispatch({
     type: LIKE_DISLIKE_SHOP,
     payload: shopId
@@ -111,7 +111,7 @@ export const likeShop = shopId => async dispatch => {
 };
 
 export const dislikeShop = shopId => async dispatch => {
-  await axios.get("http://localhost:8080/api/shops/dislike/"+shopId);
+  await axios.get("/api/shops/dislike/"+shopId);
   dispatch({
     type: LIKE_DISLIKE_SHOP,
     payload: shopId
@@ -119,7 +119,7 @@ export const dislikeShop = shopId => async dispatch => {
 };
 
 export const removeShopFromPreferredList = shopId => async dispatch => {
-  await axios.get("http://localhost:8080/api/shops/removeLikedShop/" + shopId);
+  await axios.get("/api/shops/removeLikedShop/" + shopId);
   console.log("remove " + shopId);
   dispatch({
     type: REMOVE_SHOP,
@@ -134,7 +134,7 @@ export const removeShopFromPreferredList = shopId => async dispatch => {
 
 export const register = (newUser, history) => async dispatch => {
   try {
-    await axios.post("http://localhost:8080/api/account/register", newUser);
+    await axios.post("/api/account/register", newUser);
     history.push("/login");
     dispatch({
       type: ERRORS_REGISTER,
@@ -150,7 +150,7 @@ export const register = (newUser, history) => async dispatch => {
 
 export const login = (user, history) => async dispatch => {
   try {
-    const response =  await axios.post("http://localhost:8080/api/authentication/login", user);
+    const response =  await axios.post("/api/authentication/login", user);
     const {token} = response.data;
     localStorage.setItem("token", token);
     setToken(token);
