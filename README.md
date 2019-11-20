@@ -36,7 +36,10 @@ the user can create a new account.
 ``` http
 http://localhost:3000/login
 ```
-the user can login into the application by providing a correct username and password.
+the user can login  into the application by providing a correct username and password,
+and receive a JWT token that will be used with the other requests which require authentication
+
+
 
 ### 3. Nearby Shops List
 ``` http
@@ -56,7 +59,7 @@ this page load more shops when the user scroll down or remove the shown shops wi
 the user can like a shop displayed in the nearby shops list, this shop will be added to the preferred shops list immediatly.
 the user can not like a disliked or preferred shop.
 ### 2. Dislike
-the user can dislike a shop displayed in the nearby shops list, this shop will not be displayd in the nearby shops list during the next 2 Hours.
+the user can dislike a shop displayed in the nearby shops list, this shop will not be displayed in the nearby shops list during the next 2 Hours.<br>
 the user can not dislike a disliked shop.
 ### 3. remove
 the user can remove a shop from preferred shops list 
