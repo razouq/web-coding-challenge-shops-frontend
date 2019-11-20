@@ -1,68 +1,62 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Web Coding Challenge FrontEnd
+this project represents my participation in the recruitment challenge of United Remote.
+it was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Run the App
+``` sh
+$ git clone https://github.com/razouq/web-coding-challenge-front-end.git
+$ cd web-coding-challenge-front-end
+$ yarn install
+$ yarn start
+```
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `yarn test`
+## External Packages
+- [Lodash](https://github.com/lodash/lodash)
+- [Axios](https://github.com/axios/axios)
+- [Bootstrap](https://github.com/twbs/bootstrap)
+- [Jwt-decode](https://github.com/auth0/jwt-decode)
+- [redux](https://github.com/reduxjs/redux)
+- [react-redux](https://github.com/reduxjs/react-redux)
+- [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
+- [redux-thunk](https://github.com/reduxjs/redux)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Pages
+### 1. Registration
+``` http
+http://localhost:3000/register
+```
+the user can create a new account.
 
-### `yarn build`
+### 2. Login
+``` http
+http://localhost:3000/login
+```
+the user can login into the application by providing a correct username and password.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 3. Nearby Shops List
+``` http
+http://localhost:3000/nearby-shops
+```
+the application takes automatically the location of user and display a sorted list nearby shops <br>
+this page load more shops when the user scroll down or like dislike the shown shops without scrolling.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### 4. Preferred Shops List
+``` http
+http://localhost:3000/preferred-shops
+```
+the application displays a list o preferred shops which are liked by the user <br>
+this page load more shops when the user scroll down or remove the shown shops withous scrolling.
+## Actions
+### 1. Like
+the user can like a shop displayed in the nearby shops list, this shop will be added to the preferred shops list immediatly.
+the user can not like a disliked or preferred shop.
+### 2. Dislike
+the user can dislike a shop displayed in the nearby shops list, this shop will not be displayd in the nearby shops list during the next 2 Hours.
+the user can not dislike a disliked shop.
+### 3. remove
+the user can remove a shop from preferred shops list 
