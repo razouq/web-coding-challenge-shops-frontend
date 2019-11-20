@@ -60,3 +60,5 @@ the user can dislike a shop displayed in the nearby shops list, this shop will n
 the user can not dislike a disliked shop.
 ### 3. remove
 the user can remove a shop from preferred shops list 
+#Contributor
+Anass Bendarsi bendarsi@gmail.com
