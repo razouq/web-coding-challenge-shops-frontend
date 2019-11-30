@@ -35,7 +35,6 @@ export const fetchNearbyShops = (position) => async dispatch => {
     }
   });
   const response = await axios.post("/api/shops/getNearby?page=0", position);
-  console.log("number of shops" + Object.keys(response.data).length);
   dispatch({
     type: FETCH_NEARBY_SHOPS,
     payload: response.data,
@@ -50,8 +49,7 @@ export const fetchMoreNearbyShops = (position, page) => async dispatch => {
       loading: true
     }
   });
-  const response = await axios.post("/api/shops/getNearby?page=" + page, position);
-  console.log("number of shops" + Object.keys(response.data).length);
+  const response = await axios.post(`/api/shops/getNearby?page=${page}`, position);
   dispatch({
     type: FETCH_MORE_NEARBY_SHOPS,
     payload: response.data
@@ -89,7 +87,7 @@ export const fetchMorePreferredShops = page => async dispatch => {
       loading: true
     }
   });
-  const response = await axios.get("/api/shops/getPreferred?page=" + page);
+  const response = await axios.get(`/api/shops/getPreferred?page=${page}`);
   dispatch({
     type: FETCH_MORE_PREFERRED_SHOPS,
     payload: response.data
@@ -103,7 +101,7 @@ export const fetchMorePreferredShops = page => async dispatch => {
 
 
 export const likeShop = shopId => async dispatch => {
-  await axios.get("/api/shops/like/" + shopId);
+  await axios.get(`/api/shops/like/${shopId}`);
   dispatch({
     type: LIKE_DISLIKE_SHOP,
     payload: shopId
@@ -111,7 +109,7 @@ export const likeShop = shopId => async dispatch => {
 };
 
 export const dislikeShop = shopId => async dispatch => {
-  await axios.get("/api/shops/dislike/"+shopId);
+  await axios.get(`/api/shops/dislike/${shopId}`);
   dispatch({
     type: LIKE_DISLIKE_SHOP,
     payload: shopId
@@ -119,8 +117,7 @@ export const dislikeShop = shopId => async dispatch => {
 };
 
 export const removeShopFromPreferredList = shopId => async dispatch => {
-  await axios.get("/api/shops/removeLikedShop/" + shopId);
-  console.log("remove " + shopId);
+  await axios.get(`/api/shops/removeLikedShop/${shopId}`);
   dispatch({
     type: REMOVE_SHOP,
     payload: shopId
@@ -155,14 +152,12 @@ export const login = (user, history) => async dispatch => {
     localStorage.setItem("token", token);
     setToken(token);
     const decode = jwt_decode(token);
-    console.log(decode);
     dispatch({
       type: SET_CURRENT_USER,
       payload: decode
     });
     history.push("/nearby-shops");
   } catch (err) {
-    console.log(err.response.data);
     dispatch({
       type: ERRORS_LOGIN,
       payload: {'login':'wrong username or password'}
