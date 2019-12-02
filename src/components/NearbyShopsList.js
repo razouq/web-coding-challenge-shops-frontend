@@ -21,12 +21,10 @@ class NearbyShopsList extends Component {
         },
         ()=>console.log('failed'));
     window.addEventListener("scroll", this.handleScroll,false);
-    // window.addEventListener("click", this.handleScroll,false);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll, false);
-    // window.removeEventListener('click', this.handleScroll, false);
   }
 
 
@@ -45,7 +43,6 @@ class NearbyShopsList extends Component {
     const {page, loading, hasMore} = this.props;
     const {innerHeight, scrollY} = window;
     const {offsetTop, scrollHeight} = this.listRef.current;
-    // console.log(innerHeight + scrollY, offsetTop + scrollHeight, (innerHeight + scrollY > offsetTop + scrollHeight) && !loading);
     if((innerHeight + scrollY > offsetTop + scrollHeight - 5) && !loading && hasMore) {
       console.log("should load more ...");
       window.navigator.geolocation.getCurrentPosition(

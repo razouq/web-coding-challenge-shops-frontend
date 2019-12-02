@@ -14,7 +14,6 @@ const initialState = {
   hasMore: true
 };
 
-
 export default (state = initialState, action) => {
   switch (action.type) {
     case FETCH_PREFERRED_SHOPS:

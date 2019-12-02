@@ -5,7 +5,6 @@ import thunk from "redux-thunk";
 let store;
 let isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
 if (isChrome) {
-  console.log("chrome");
   store = createStore(reducers,
     compose(
       applyMiddleware(thunk),
@@ -13,7 +12,6 @@ if (isChrome) {
     )
   );
 } else {
-  console.log("not chrome");
   store = createStore(
     reducers,
     applyMiddleware(thunk)

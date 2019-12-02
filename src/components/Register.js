@@ -11,8 +11,6 @@ class Register extends Component {
     passwordConfirm:""
   };
 
-
-
   onChange = e => {
     this.setState({[e.target.name]: e.target.value});
   };
@@ -90,7 +88,6 @@ class Register extends Component {
             </form>
           </div>
         </div>
-
       </div>
     );
   }

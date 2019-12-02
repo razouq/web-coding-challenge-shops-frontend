@@ -13,8 +13,6 @@ class NearbyShop extends Component {
     this.props.dislikeShop(shopId);
   };
 
-  did
-
   render() {
     const {id, name, picture} = this.props.shop;
     return (

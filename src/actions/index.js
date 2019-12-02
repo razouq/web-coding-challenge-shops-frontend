@@ -16,7 +16,6 @@ import {
 import jwt_decode from 'jwt-decode';
 import setToken from "../security-utils/setToken";
 
-
 /********************
  *   NEARBY SHOPS   *
  ********************/

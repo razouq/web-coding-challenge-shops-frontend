@@ -8,10 +8,8 @@ const initialState = {
 
 const check = payload => {
   if(Object.keys(payload).length === 0) {
-    console.log("false " + payload);
     return false;
   } else {
-    console.log("true " + payload);
     return true;
   }
 };

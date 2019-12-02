@@ -21,7 +21,6 @@ class Navbar extends Component {
             <li className="nav-item">
               <Link className="nav-link" to="/preferred-shops">My Preferred Shops</Link>
             </li>
-
           </ul>
           <ul className="nav justify-content-end">
             {
